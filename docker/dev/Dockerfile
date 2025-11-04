@@ -46,7 +46,7 @@ RUN mkdir -p /home/ue4/ros2_ws/src
 
 # Add sourcing of ROS workspace to bashrc
 RUN echo 'source /home/ue4/ros2_ws/install/setup.bash' >> /home/ue4/.bashrc
-RUN echo 'alias holoocean="ros2 launch holoocean_main holoocean_launch.py params_file:=\"/home/ue4/ros2_ws/src/holoocean_ros/holoocean_main/config/ros_params.yaml\""'
+RUN echo 'alias holoocean="ros2 launch holoocean_main holoocean_launch.py params_file:=\"/home/ue4/ros2_ws/src/holoocean_ros/holoocean_main/config/ros_params.yaml\""' >> /home/ue4/.bashrc
 
 # Default command
 CMD ["/bin/bash"]
