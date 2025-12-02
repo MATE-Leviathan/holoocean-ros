@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from sensor_msgs.msg import Imu, Image
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Vector3Stamped, PoseWithCovarianceStamped, TwistWithCovarianceStamped
-from holoocean_interfaces.msg import DVLSensorRange, ControlCommand
+from holoocean_interfaces.msg import DVLSensorRange, ControlCommand, ImagingSonar
 import numpy as np
 
 # TODO make a not about how the Dynamics Sensor IMU is not in local frame
@@ -399,6 +399,21 @@ class ImageEncoder(SensorPublisher):
 
 # Define other encoders similarly...
 
+class SonarEncoder(SensorPublisher):
+    def __init__(self, sensor_dict):
+        super().__init__(sensor_dict)
+
+        self.message_type = ImagingSonar
+
+
+    def encode(self, sensor_data):
+        msg = self.message_type()
+        msg.timestamp = 0
+        msg.bins_azimuth = 512
+        msg.bins_range = 512
+        msg.image = sensor_data.flatten().tolist()
+
+        return msg
 
 encoders = {
     'IMUSensor': IMUEncoder,
@@ -414,4 +429,5 @@ encoders = {
     'ControlCommand': CommandEncoder,
     'RGBCamera': ImageEncoder,
     # Add other sensor type encoders here...
+    'ImagingSonar': SonarEncoder
 }

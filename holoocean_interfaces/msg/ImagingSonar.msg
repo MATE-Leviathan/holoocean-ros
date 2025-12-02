@@ -1,5 +1,6 @@
 # ImagingSonar message
 # Contains timestamp, bins information, and image data
+std_msgs/Header header
 
 # Timestamp in nanoseconds
 int64 timestamp
@@ -12,5 +13,4 @@ int32 bins_range
 
 # Image data separated into two lists
 # Could make it one list by flattening array with numpy
-float32[] image_azimuth
-float32[] image_range
+float32[] image
