@@ -3,7 +3,7 @@
 build/
 install/
 log/
-
+__pycache__/
 
 !*.xml
 !*.json
